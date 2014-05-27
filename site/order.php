@@ -32,12 +32,12 @@ $total = $bsc_total + $c_total + $wc_total +$k_total;
 
 // Create the charge on Stripe's servers - this will charge the user's card
 try {
-//  $charge = Stripe_Charge::create(array(
-//              "amount" => $total, // amount in cents, again
-//              "currency" => "usd",
-//              "card" => $token,
-//              "description" => "Email: $email, Name: $name, Address: $address")
-//  );
+  $charge = Stripe_Charge::create(array(
+              "amount" => $total, // amount in cents, again
+              "currency" => "usd",
+              "card" => $token,
+              "description" => "Email: $email, Name: $name, Address: $address")
+  );
   
   header('Location: http://popuppopcorn.com/thanks.html');
   
