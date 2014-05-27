@@ -5,6 +5,8 @@
 Stripe::setApiKey("4VgBCX2ZnQyEITwx04tka8pAzG9IdOFX");
 
 // Get the credit card details submitted by the form
+print_r($_POST);
+
 $token = $_POST['stripeToken'];
 $bsc = $_POST['bsc'];
 $k = $_POST['k'];
@@ -30,6 +32,11 @@ try {
               "card" => $token,
               "description" => $email)
   );
+  
+  print_r($charge);
+  
 } catch (Stripe_CardError $e) {
   // The card has been declined
+  
+  echo "card declined";
 }
