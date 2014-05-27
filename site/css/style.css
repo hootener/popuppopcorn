@@ -104,6 +104,7 @@
 
 	header
 	{
+		background-image: url('images/popcorn.jpg');
 	}
 	
 		header > span
@@ -937,12 +938,12 @@
 	{
 		position: relative;
 		background: #f08c89;
-		background-image: url('images/header.svg');
-		background-image: url('images/header.svg'), -moz-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%);
-		background-image: url('images/header.svg'), -webkit-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%);
-		background-image: url('images/header.svg'), -o-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%);
-		background-image: url('images/header.svg'), -ms-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%);
-		background-image: url('images/header.svg'), linear-gradient(75deg, #FF7088 15%, #F2B69D 55%);
+		background-image: url('images/popcorn.jpg');
+		background-image: url('images/popcorn.jpg'); /*, -moz-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%); */
+		background-image: url('images/popcorn.jpg'); /*, -webkit-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%); */
+		background-image: url('images/popcorn.jpg'); /*, -o-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%); */
+		background-image: url('images/popcorn.jpg'); /*, -ms-linear-gradient(75deg, #FF7088 15%, #F2B69D 55%); */
+		background-image: url('images/popcorn.jpg'); /*, linear-gradient(75deg, #FF7088 15%, #F2B69D 55%); */
 	}
 	
 		#header-wrapper:before
