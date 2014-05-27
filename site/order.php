@@ -4,8 +4,9 @@ require_once('./lib/Stripe.php');
 // See your keys here https://manage.stripe.com/account
 Stripe::setApiKey("sk_live_YvIO200r6Y26gASwSuQjg1Mq");
 
+//echo "stuff";
 // Get the credit card details submitted by the form
-//print_r($_POST);
+print_r($_POST);
 
 $token = $_POST['stripeToken'];
 $bsc = $_POST['bsc'];
@@ -27,12 +28,12 @@ $total = $bsc_total + $c_total + $wc_total +$k_total;
 
 // Create the charge on Stripe's servers - this will charge the user's card
 try {
-  $charge = Stripe_Charge::create(array(
-              "amount" => $total, // amount in cents, again
-              "currency" => "usd",
-              "card" => $token,
-              "description" => "Email: $email, Name: $name, Address: $address")
-  );
+//  $charge = Stripe_Charge::create(array(
+//              "amount" => $total, // amount in cents, again
+//              "currency" => "usd",
+//              "card" => $token,
+//              "description" => "Email: $email, Name: $name, Address: $address")
+//  );
   
   header('Location: http://popuppopcorn.com/thanks.html');
   
