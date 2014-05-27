@@ -215,27 +215,34 @@
 	{
 		padding: 4em 0 2em 0;
 		
-		/*
-			If you're using your own background image here, change this to:
-
-			background-size: cover;
-		*/
 		
-		background-size: 100% 620%;
+		
+		background-size: cover;
+		
+		
+		/*background-size: 100% 620%; */
 	}
 	
 		.homepage #header-wrapper
 		{
 			padding: 10em 0 6em 0;
 
-			/*
-				If you're using your own background image here, change this to:
+			background-size: cover;
+			
+			/*background image*/
+			background-image: url('images/popcorn_background.jpg');
+			
 
-				background-size: cover;
-			*/
-
-			background-size: 100% 100%;
+			/*background-size: 100% 100%; */
 		}
+
+
+
+
+
+
+
+
 	
 	#promo-wrapper
 	{
@@ -258,6 +265,16 @@
 		#hero h2
 		{
 			font-size: 3em;
+			color: white;
+			text-shadow: black 0.1em 0.1em 0.2em;
+		}
+
+		#hero h3
+		{
+			font-size: 2em;
+			color: white;
+			text-shadow: black 0.1em 0.1em 0.2em;
+
 		}
 		
 		#hero p
