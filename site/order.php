@@ -2,7 +2,7 @@
 require_once('./lib/Stripe.php');
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://manage.stripe.com/account
-Stripe::setApiKey("4VgBCX2ZnQyEITwx04tka8pAzG9IdOFX");
+Stripe::setApiKey("eIXrTkWO6PI3369rNrk5JHRgxYcsUQLw");
 
 // Get the credit card details submitted by the form
 //print_r($_POST);
