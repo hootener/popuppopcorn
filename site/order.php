@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+
 require_once('./lib/Stripe.php');
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://manage.stripe.com/account
@@ -6,7 +10,7 @@ Stripe::setApiKey("sk_live_YvIO200r6Y26gASwSuQjg1Mq");
 
 //echo "stuff";
 // Get the credit card details submitted by the form
-print_r($_POST);
+
 
 $token = $_POST['stripeToken'];
 $bsc = $_POST['bsc'];
