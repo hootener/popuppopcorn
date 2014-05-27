@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<!--
+  Telephasic 1.1 by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Telephasic by HTML5 UP</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.dropotron.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+    <link rel="stylesheet" href="css/skel-noscript.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style-n1.css" />
+    </noscript>
+
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <!-- jQuery is used only for this example; it isn't required to use Stripe -->
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+
+    <script type="text/javascript">
+      // This identifies your website in the createToken call below
+      Stripe.setPublishableKey('pk_04mEQd5bVCgtUotj0SItP4IrPDucN');
+
+      var stripeResponseHandler = function(status, response) {
+        var $form = $('#payment-form');
+
+        if (response.error) {
+          // Show the errors on the form
+          $form.find('.payment-errors').text(response.error.message);
+          $form.find('button').prop('disabled', false);
+        } else {
+          // token contains id, last4, and card type
+          var token = response.id;
+          // Insert the token into the form so it gets submitted to the server
+          $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+          // and re-submit
+          $form.get(0).submit();
+        }
+      };
+
+      jQuery(function($) {
+        $('#payment-form').submit(function(e) {
+          var $form = $(this);
+
+          // Disable the submit button to prevent repeated clicks
+          $form.find('button').prop('disabled', true);
+
+          Stripe.card.createToken($form, stripeResponseHandler);
+
+          // Prevent the form from submitting with the default action
+          return false;
+        });
+      });
+    </script>
+
+  </head>
+  <body class="homepage">
+
+    <!-- Header Wrapper -->
+    <div id="header-wrapper">
+
+      <!-- Header -->
+      <div id="header" class="container">
+        <!-- Logo -->
+        <h1 id="logo"><a href="index.html">Pop Up Popcorn</a></h1>
+      </div>
+
+      <!-- Features 1 -->
+      <div class="wrapper" style="padding-top: 25px;">
+
+        <div class="container">
+          <h2 style="padding-bottom: 30px;">Order Popcorn</h2>
+          <div class="row">
+            <div class="12u">
+
+              <form action="order.php" method="POST" id="payment-form">
+                <span class="payment-errors" style="color: red"></span>
+
+                <table style="width: 100%">
+                  <tr>
+                    <td width="65%">
+                      <div class="form-group">
+                        <label>
+                          <span>Cheddarific - Quantity</span>
+                        </label>
+
+                        <input name="c" type="text" size="20" data-stripe="cheddarific" />
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          <span>White Cheddar - Quantity</span>
+
+                        </label>
+                        <input name="wc" type="text" size="20" data-stripe="whitecheddar"/>
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          <span>Kettle Corn - Quantity</span>
+
+                        </label>
+                        <input name="k" type="text" size="20" data-stripe="kettlecorn" />
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          <span>Brown Sugar Caramel - Quantity</span>
+
+                        </label>
+                        <input name="bsc" type="text" size="20" data-stripe="brownsugar" />
+                      </div>
+
+                      <br/>
+                      <img src="images/big@2x.png"/>
+
+                    </td>
+                    <td width="*">
+                      <div class="form-group">
+                        <label>
+                          <span>Name</span>
+
+                        </label>
+                        <input name="name" type="text" size="20" data-stripe="number"/>
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          <span>Email</span>
+
+                        </label>
+                        <input name="email" type="text" size="20" data-stripe="number"/>
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          <span>Card Number</span>
+
+                        </label>
+                        <input type="text" size="20" data-stripe="number"/>
+                      </div>
+
+                      <div class="form-group">
+                        <label>
+                          <span>CVC</span>
+
+                        </label>
+                        <input type="text" size="4" data-stripe="cvc" />
+                      </div>
+
+                      <div class="form-group">
+                        <label>
+                          <span>Expiration (MM/YYYY)</span>
+                        </label>
+                        <input type="text" size="2" data-stripe="exp-month">
+                        <span> / </span>
+                        <input type="text" size="4" data-stripe="exp-year" />
+                      </div><Br/>
+                      <button type="submit"  class="button">Submit Payment</button>
+
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>
