@@ -1,11 +1,11 @@
 <?php
-
+require_once('./lib/Stripe.php');
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://manage.stripe.com/account
 Stripe::setApiKey("4VgBCX2ZnQyEITwx04tka8pAzG9IdOFX");
 
 // Get the credit card details submitted by the form
-print_r($_POST);
+//print_r($_POST);
 
 $token = $_POST['stripeToken'];
 $bsc = $_POST['bsc'];
@@ -15,11 +15,12 @@ $c = $_POST['c'];
 
 $name = $_POST['name'];
 $email = $_POST['email'];
+$address = $_POST['address'];
 
-$bsc_total = 6000 * (int)$bsc;
-$c_total = 6000 * (int)$c;
-$wc_total = 6000 * (int)$wc;
-$k_total = 6000 * (int)$k;
+$bsc_total = 600 * (int)$bsc;
+$c_total = 600 * (int)$c;
+$wc_total = 600 * (int)$wc;
+$k_total = 600 * (int)$k;
 
 $total = $bsc_total + $c_total + $wc_total +$k_total;
 
@@ -30,13 +31,13 @@ try {
               "amount" => $total, // amount in cents, again
               "currency" => "usd",
               "card" => $token,
-              "description" => $email)
+              "description" => "Email: $email, Name: $name, Address: $address")
   );
   
-  print_r($charge);
+  header('Location: http://popuppopcorn.com/thanks.html');
   
 } catch (Stripe_CardError $e) {
   // The card has been declined
   
-  echo "card declined";
+  header('Location: http://popuppopcorn.com/card_error.html');
 }
