@@ -41,17 +41,16 @@
         }
       });
 
-      if(session.checkSystemRequirements() != 0){
-        session.connect(token, function(error) {
-          if(session.capabilites.publish == 1){
-            var publisher = OT.initPublisher();
-            session.publish(publisher);
-          }
-          else{
-            console.log('cannot publish');
-          }
-        });
-      }
+
+      session.connect(token, function(error) {
+        if(session.capabilities.publish == 1){
+          var publisher = OT.initPublisher();
+          session.publish(publisher);
+        }
+        else{
+          console.log('cannot publish');
+        }
+      });
 
 
     </script>
