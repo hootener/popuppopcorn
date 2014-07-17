@@ -29,7 +29,7 @@
           }
         });
       });
-   
+     
       session.on({
         connectionCreated: function(event){
           var connectionCount = Number($('#user-count').text()) + 1;
@@ -38,6 +38,17 @@
         connectionDestroyed: function(event){
           var connectionCount = Number($('#user-count').text()) - 1;
           $('#user-count').text(connectionCount);
+        }
+      });
+
+
+      session.connect(token, function(error) {
+        if(session.capabilities.publish == 1){
+          var publisher = OT.initPublisher();
+          session.publish(publisher);
+        }
+        else{
+          console.log('cannot publish');
         }
       });
 
