@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<!--
+  Telephasic 1.1 by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>An OpenTok Stress Test -- subscriber</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="//static.opentok.com/webrtc/v2.2/js/opentok.min.js" ></script>
+    <script type="text/javascript">
+      var apiKey    = "44902251";
+      var sessionId = "2_MX40NDkwMjI1MX5-V2VkIEp1bCAxNiAxNTo1NDozNyBQRFQgMjAxNH4wLjYxNTcyMzF-fg";
+      var token     = "T1==cGFydG5lcl9pZD00NDkwMjI1MSZzaWc9NDlhNWU1YmY1MDQ1Njc4Y2VkNWZlM2U0MWI3MGJkZWNhYjEzY2VlYzpyb2xlPXN1YnNjcmliZXImc2Vzc2lvbl9pZD0yX01YNDBORGt3TWpJMU1YNS1WMlZrSUVwMWJDQXhOaUF4TlRvMU5Eb3pOeUJRUkZRZ01qQXhOSDR3TGpZeE5UY3lNekYtZmcmY3JlYXRlX3RpbWU9MTQwNTU1MTMwNyZub25jZT0wLjYxMTg2Njk0NTEzNjU0MDImZXhwaXJlX3RpbWU9MTQwODE0MzI2NA==";
+     
+      var session = OT.initSession(apiKey, sessionId);
+     
+      session.on("streamCreated", function(event) {
+        var subscriber = session.subscribe(event.stream, 'video-stream', function(error){
+          if(error){
+            console.log(error)
+          }
+          else{
+            console.log('subscriber added');
+          }
+        });
+      });
+     
+      session.on({
+        connectionCreated: function(event){
+          var connectionCount = $('#user-count').text() + 1;
+          $('#user-count').text(connectionCount);
+        },
+        connectionDestroyed: function(event){
+          var connectionCount = $('#user-count').text() - 1;
+          $('#user-count').text(connectionCount);
+        }
+      });
+
+      if(session.checkSystemRequirements() != 0){
+        session.connect(token, function(error) {
+          if(session.capabilites.publish == 1){
+            var publisher = OT.initPublisher();
+            session.publish(publisher);
+          }
+          else{
+            console.log('cannot publish');
+          }
+        });
+      }
+
+
+    </script>
+
+
+
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+  </head>
+  <body class="homepage">
+  <p> This is an openTok Test. There are <span id="user-count"> 0 </span> people watching this stream. </p>
+  <div id="video-stream">
+  </div>
+
+  </body>
+</html>
