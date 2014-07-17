@@ -36,7 +36,7 @@ try {
               "amount" => $total, // amount in cents, again
               "currency" => "usd",
               "card" => $token,
-              "description" => "Email: $email, Name: $name, Address: $address")
+              "description" => "Email: $email, Name: $name, Address: $address, Brown: $bsc, kettle: $k, White Cheddar: $wc, Cheddar: $c ")
   );
   
   header('Location: http://popuppopcorn.com/thanks.html');
