@@ -32,11 +32,11 @@
      
       session.on({
         connectionCreated: function(event){
-          var connectionCount = $('#user-count').text() + 1;
+          var connectionCount = Number($('#user-count').text()) + 1;
           $('#user-count').text(connectionCount);
         },
         connectionDestroyed: function(event){
-          var connectionCount = $('#user-count').text() - 1;
+          var connectionCount = Number($('#user-count').text()) - 1;
           $('#user-count').text(connectionCount);
         }
       });
