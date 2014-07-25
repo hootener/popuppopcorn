@@ -40,11 +40,22 @@ and open the template in the editor.
     </script>
 
     <h1> Western Edge -- coming soon </h1>
+
     <div id='weEdge'></div>
   
 
-    <h1> EU Edge  -- coming soon</h1>
-    <div id='euEdge'></div>
+    <h1> WEU Edge  -- coming soon</h1>
+    <div id='weuEdge'></div>
+    <script type='text/javascript'>
+      jwplayer('weuEdge').setup({
+        sources: [{
+            file: "rtmp://live-edge-weu-1.cloudapp.net:1935/liveedge/livestream"
+          }],
+        rtmp: {
+          bufferlength: 0.1
+        }
+      });
+    </script>
  
   </body>
 </html>
