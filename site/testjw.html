@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>JW Player Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://jwpsrv.com/library/0vr7whNmEeS7ZSIAC0MJiQ.js"></script>
+  </head>
+  <body>
+
+
+    <div id="mediaplayer">This div will be replaced by the JW Player</div>
+    <script>
+      jwplayer('mediaplayer').setup({
+        width: "100%",
+        height: "100%",
+        primary: "flash",
+        autostart: "true",
+        repeat: 'always',
+        sources: [
+          {file: "rtmp://test1t8rrnmvc.rtmphost.com/Live/livestream"}
+        ]
+      });
+    </script>
+
+    <div id='playerOIsfPzMbCVAo'></div>
+    <script type='text/javascript'>
+      jwplayer('playerOIsfPzMbCVAo').setup({
+        sources: [{
+            file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/live/livestream"
+          }]
+
+      });
+    </script>
+  </body>
+</html>
