@@ -48,12 +48,24 @@ and open the template in the editor.
             });
           </script>
         </div>
+
+         <div class="row">
+          <h1> Western US Edge</h1>
+          <div id='wEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('wEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-wus-2.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
       </div>
       <div class="col-md-6">
         <div class="row">
-          <h1> Western Edge -- coming soon </h1>
-          <div id='weEdge'></div>
-          <h1> WEU Edge  -- coming soon</h1>
+          <h1> Western Europe Edge</h1>
           <div id='weuEdge'></div>
           <script type='text/javascript'>
             jwplayer('weuEdge').setup({
@@ -66,8 +78,22 @@ and open the template in the editor.
             });
           </script>
         </div>
+
+        <div class="row">
+          <h1> Eastern US Edge</h1>
+          <div id='eEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('eEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-eus1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
       </div>
     </div>
- 
   </body>
 </html>
