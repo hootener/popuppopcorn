@@ -13,16 +13,38 @@ and open the template in the editor.
   </head>
   <body>
 
-    <div id='playerOIsfPzMbCVAo'></div>
+    <h1> The Origin </h1>
+    <div id='originPlayer'></div>
     <script type='text/javascript'>
-      jwplayer('playerOIsfPzMbCVAo').setup({
+      jwplayer('originPlayer').setup({
         sources: [{
-            file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/live/livestream"
+            file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/liveorigin/livestram"
           }],
         rtmp: {
           bufferlength: 0.1
         }
       });
     </script>
+
+    <h1> Southeastern Edge </h1>
+    <div id='seEdge'></div>
+    <script type='text/javascript'>
+      jwplayer('seEdge').setup({
+        sources: [{
+            file: "rtmp://live-edge-us-1.cloudapp.net:1935/liveedge/livestream"
+          }],
+        rtmp: {
+          bufferlength: 0.1
+        }
+      });
+    </script>
+
+    <h1> Western Edge -- coming soon </h1>
+    <div id='weEdge'></div>
+  
+
+    <h1> EU Edge  -- coming soon</h1>
+    <div id='euEdge'></div>
+ 
   </body>
 </html>
