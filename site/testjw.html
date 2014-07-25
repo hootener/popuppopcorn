@@ -9,53 +9,65 @@ and open the template in the editor.
     <title>JW Player Test</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://jwpsrv.com/library/0vr7whNmEeS7ZSIAC0MJiQ.js"></script>
   </head>
   <body>
-
-    <h1> The Origin </h1>
-    <div id='originPlayer'></div>
-    <script type='text/javascript'>
-      jwplayer('originPlayer').setup({
-        sources: [{
-            file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/liveorigin/livestream"
-          }],
-        rtmp: {
-          bufferlength: 0.1
-        }
-      });
-    </script>
-
-    <h1> Southeastern Edge </h1>
-    <div id='seEdge'></div>
-    <script type='text/javascript'>
-      jwplayer('seEdge').setup({
-        sources: [{
-            file: "rtmp://live-edge-us-1.cloudapp.net:1935/liveedge/livestream"
-          }],
-        rtmp: {
-          bufferlength: 0.1
-        }
-      });
-    </script>
-
-    <h1> Western Edge -- coming soon </h1>
-
-    <div id='weEdge'></div>
-  
-
-    <h1> WEU Edge  -- coming soon</h1>
-    <div id='weuEdge'></div>
-    <script type='text/javascript'>
-      jwplayer('weuEdge').setup({
-        sources: [{
-            file: "rtmp://live-edge-weu-1.cloudapp.net:1935/liveedge/livestream"
-          }],
-        rtmp: {
-          bufferlength: 0.1
-        }
-      });
-    </script>
+    <div class="container">
+      <div class="col-md-6">
+        <div class="row">  
+          <h1> The Origin </h1>
+          <div id='originPlayer'></div>
+          <script type='text/javascript'>
+            jwplayer('originPlayer').setup({
+              sources: [{
+                  file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/liveorigin/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+        <div class="row">
+          <h1> Southeastern Edge </h1>
+          <div id='seEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('seEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-us-1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <h1> Western Edge -- coming soon </h1>
+          <div id='weEdge'></div>
+          <h1> WEU Edge  -- coming soon</h1>
+          <div id='weuEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('weuEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-weu-1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+      </div>
+    </div>
  
   </body>
 </html>
