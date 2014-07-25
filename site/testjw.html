@@ -13,28 +13,15 @@ and open the template in the editor.
   </head>
   <body>
 
-
-    <div id="mediaplayer">This div will be replaced by the JW Player</div>
-    <script>
-      jwplayer('mediaplayer').setup({
-        width: "100%",
-        height: "100%",
-        primary: "flash",
-        autostart: "true",
-        repeat: 'always',
-        sources: [
-          {file: "rtmp://test1t8rrnmvc.rtmphost.com/Live/livestream"}
-        ]
-      });
-    </script>
-
     <div id='playerOIsfPzMbCVAo'></div>
     <script type='text/javascript'>
       jwplayer('playerOIsfPzMbCVAo').setup({
         sources: [{
             file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/live/livestream"
-          }]
-
+          }],
+        rtmp: {
+          bufferlength: 0.1
+        }
       });
     </script>
   </body>
