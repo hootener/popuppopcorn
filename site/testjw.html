@@ -35,6 +35,20 @@ and open the template in the editor.
           </script>
         </div>
         <div class="row">
+          <h1> Load Balancer </h1>
+          <div id='lb'></div>
+          <script type='text/javascript'>
+            jwplayer('lb').setup({
+              sources: [{
+                  file: "rtmp://lb-sus-1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+        <div class="row">
           <h1> Southeastern Edge </h1>
           <div id='seEdge'></div>
           <script type='text/javascript'>
