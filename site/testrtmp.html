@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>JW Player Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://jwpsrv.com/library/0vr7whNmEeS7ZSIAC0MJiQ.js"></script>
+
+    <link href="//vjs.zencdn.net/4.6/video-js.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/4.6/video.js"></script>
+
+    <script>
+      require(
+      ["jquery", "videojs_playlists"],
+      function($) {
+        "use strict";
+
+        // Array of videos to include in the playlist
+        var videos = [
+          {
+            src: [
+              'https://s3.amazonaws.com/gamewisp-video/bf2736ab-4cda-4713-97a1-eda8b81d3304.mp4'
+            ],
+            poster: 'http://www.videojs.com/img/poster.jpg',
+            title: 'Test '
+          },
+          {
+            src: [
+              'http://vjs.zencdn.net/v/oceans.mp4',
+              'http://vjs.zencdn.net/v/oceans.webm'
+            ],
+            poster: 'http://www.videojs.com/img/poster.jpg',
+            title: 'Ocean'
+          },
+          {
+            src: [
+              'http://stream.flowplayer.org/night3/640x360.webm',
+              'http://stream.flowplayer.org/night3/640x360.mp4',
+              'http://stream.flowplayer.org/night3/640x360.ogv'
+            ],
+            poster: 'http://flowplayer.org/media/img/demos/playlist/railway_station.jpg',
+            title: 'Video 2'
+          },
+          {
+            src: [
+              'http://stream.flowplayer.org/functional/624x260.webm',
+              'http://stream.flowplayer.org/functional/624x260.mp4',
+              'http://stream.flowplayer.org/functional/624x260.ogv'
+            ],
+            poster: 'http://flowplayer.org/media/img/demos/functional.jpg',
+            title: 'Video 3'
+          }
+        ];
+
+        var playlistModule = (function() {
+          var els = {};
+          var player;
+          var cacheElements = function() {
+            els.$playlist = $('div.playlist > ul');
+            els.$next = $('#next');
+            els.$prev = $('#prev');
+          };
+          var initVideo = function() {
+            player = videojs('video');
+            player.playList(videos);
+          };
+          var createListOfVideos = function() {
+            var html = '';
+            for (var i = 0, len = player.pl.videos.length; i < len; i++) {
+              html += '<li data-videoplaylist="' + i + '">' +
+              '<span class="number">' + (i + 1) + '</span>' +
+              '<span class="poster"><img src="' + videos[i].poster + '"></span>' +
+              '<span class="title">' + videos[i].title + '</span>' +
+              '</li>';
+            }
+            els.$playlist.empty().html(html);
+            updateActiveVideo();
+          };
+          var updateActiveVideo = function() {
+            var activeIndex = player.pl.current;
+
+            els.$playlist.find('li').removeClass('active');
+            els.$playlist.find('li[data-videoplaylist="' + activeIndex + '"]').addClass('active');
+          };
+          var bindEvents = function() {
+            var self = this;
+            els.$playlist.find('li').on('click', $.proxy(selectVideo, this));
+            els.$next.on('click', $.proxy(function() {
+              player.next();
+            }, this));
+            els.$prev.on('click', $.proxy(function() {
+              player.prev();
+            }, this));
+            player.on('next', function(e) {
+              window.console.log('Next video');
+              updateActiveVideo.apply(self);
+            });
+            player.on('prev', function(e) {
+              window.console.log('Previous video');
+              updateActiveVideo.apply(self);
+            });
+            player.on('lastVideoEnded', function(e) {
+              window.console.log('Last video has finished');
+            });
+          };
+          var selectVideo = function(e) {
+            var clicked = e.target.nodeName === 'LI' ? $(e.target) : $(e.target).closest('li');
+
+            if (!clicked.hasClass('active')) {
+              window.console.log('Selecting video');
+              var videoIndex = clicked.data('videoplaylist');
+              player.playList(videoIndex);
+              updateActiveVideo();
+            }
+          };
+          return {
+            init: function() {
+              cacheElements();
+              initVideo();
+              createListOfVideos();
+              bindEvents();
+            }
+          };
+        })();
+
+        $(playlistModule.init);
+      }
+      );
+    </script>
+    <style type="text/css">
+      .video-holder {
+        background: #1b1b1b;
+        padding: 10px;
+        width: 1024px;
+        margin: 0 auto;
+      }
+
+      .playlist-components {
+      }
+      .video-js, .playlist-components {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .playlist {
+        height: 220px;
+        width: 359px;
+        overflow-y: auto;
+        color: #c0c0c0;
+        border-radius: 8px;
+        display: block;
+        margin: 5px 0;
+        padding: 1px 0 0 0;
+        position: relative;
+        background: -moz-linear-gradient(top,#000 0,#212121 19%,#212121 100%);
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#000),color-stop(19%,#212121),color-stop(100%,#212121));
+        background: -o-linear-gradient(top,#000 0,#212121 19%,#212121 100%);
+        background: -ms-linear-gradient(top,#000 0,#212121 19%,#212121 100%);
+        background: linear-gradient(to bottom,#000 0,#212121 19%,#212121 100%);
+        box-shadow: 0 1px 1px #1a1a1a inset,0px 1px 1px #454545;
+        border: 1px solid #1a1a18;
+      }
+      #next {
+        float: right;
+      }
+      #prev {
+        float: left;
+      }
+
+      #prev, #next {
+        cursor: pointer;
+      }
+
+      .playlist ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .playlist ul li {
+        padding: 10px;
+        border-bottom: 1px solid #000;
+        cursor: pointer;
+      }
+      .playlist ul li.active {
+        background-color: #4f4f4f;
+        border-color: #4f4f4f;
+        color: #FFF;
+      }
+      .playlist ul li:hover {
+        border-color: #353535;
+        background: #353535;
+      }
+
+      .playlist .poster, .playlist .title  {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .playlist .number{
+        padding-right: 10px;
+      }
+      .playlist .poster img {
+        width: 64px;
+      }
+      .playlist .title {
+        padding-left: 10px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+
+
+      <h1>Video Examples</h1>
+
+      <h2>Videos with Playlist</h2>
+      <div class="video-holder centered">
+        <video id="video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup='' poster=""></video>
+        <div class="playlist-components">
+          <div class="playlist">
+            <ul></ul>
+          </div>
+          <div class="button-holder">
+            <a id="prev" href="#"><img alt="Previous video" src="{{URL::asset('img/icons/uparrow_orange.png')}}">Previous</a>
+            <a id="next" href="#">Next<img alt="Next video" src="{{URL::asset('img/icons/downarrow_orange.png')}}"></a>
+          </div>
+        </div>
+      </div>
+
+      <h2>Standalone Video</h2>
+      <video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" 
+             width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup='{"example_option":true}'>
+        <source src="rtmp://172.28.115.184:1935/live/gamewisp" type='rtmp/flv' />
+      </video>
+
+
+
+
+      <div class="col-md-6">
+        <div class="row">  
+          <h1> The Origin </h1>
+          <div id='originPlayer'></div>
+          <script type='text/javascript'>
+            jwplayer('originPlayer').setup({
+              sources: [{
+                  file: "rtmp://gamewisp-wowza-test-1.cloudapp.net:1935/liveorigin/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+        <div class="row">
+          <h1> Load Balancer !</h1>
+          <div id='lb'></div>
+          <script type='text/javascript'>
+            jwplayer('lb').setup({
+              sources: [{
+                  file: "rtmp://stream-lb.gamewisp.com:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+        <div class="row">
+          <h1> Southeastern Edge </h1>
+          <div id='seEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('seEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-us-1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+
+        <div class="row">
+          <h1> Western US Edge</h1>
+          <div id='wEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('wEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-wus-2.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <h1> Local</h1>
+          <div id='local'></div>
+          <script type='text/javascript'>
+            jwplayer('local').setup({
+              sources: [{
+                  file: "rtmp://172.28.115.184:1935/live/gamewisp"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+        <div class="row">
+          <h1> Western Europe Edge</h1>
+          <div id='weuEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('weuEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-weu-1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+
+        <div class="row">
+          <h1> Eastern US Edge</h1>
+          <div id='eEdge'></div>
+          <script type='text/javascript'>
+            jwplayer('eEdge').setup({
+              sources: [{
+                  file: "rtmp://live-edge-eus1.cloudapp.net:1935/liveedge/livestream"
+                }],
+              rtmp: {
+                bufferlength: 0.1
+              }
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
